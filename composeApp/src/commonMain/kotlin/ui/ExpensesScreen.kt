@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -30,10 +31,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import getColorsTheme
 import model.Expense
+import presentation.ExpensesUIState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExpensesScreen() {
+fun ExpensesScreen(
+    uiState: ExpensesUIState,
+    onExpenseClick: (expense: Expense) -> Unit
+) {
 
     val colors = getColorsTheme()
 
@@ -47,14 +52,16 @@ fun ExpensesScreen() {
                     color = colors.backgroundColor
                 )
             ) {
-                ExpensesTotalHeader(
-                    total = 100.0
-                )
+                ExpensesTotalHeader(total = uiState.total)
                 AllExpensesHeader()
             }
         }
-        item {
-            //ExpensesItem()
+
+        items(uiState.expenses) { expense ->
+            ExpensesItem(
+                expense = expense,
+                onExpenseClick = onExpenseClick
+            )
         }
     }
 }
