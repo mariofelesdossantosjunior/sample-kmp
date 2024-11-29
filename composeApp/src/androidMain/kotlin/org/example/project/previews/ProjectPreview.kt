@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import data.ExpenseManager
 import presentation.ExpensesUIState
 import ui.AllExpensesHeader
+import ui.ExpenseAmount
 import ui.ExpensesItem
 import ui.ExpensesScreen
 import ui.ExpensesTotalHeader
@@ -58,4 +59,18 @@ private fun ExpenseScreenPreview() {
         ),
         onExpenseClick = {}
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ExpenseAmountPreview() {
+    Box(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        ExpenseAmount(
+           priceContent = 0.0,
+            onPriceChange = {},
+            keyboardController = null
+        )
+    }
 }

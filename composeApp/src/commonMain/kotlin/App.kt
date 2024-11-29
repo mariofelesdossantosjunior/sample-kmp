@@ -43,7 +43,7 @@ fun App() {
                         elevation = 0.dp,
                         title = {
                             Text(
-                                text = "Dashboards",
+                                text = titleTopBar,
                                 fontSize = 25.sp,
                                 color = colors.textColor
                             )
@@ -106,7 +106,7 @@ fun getTitleTopBar(navigator: Navigator): String {
     val isOnAddExpense = navigator.currentEntry
         .collectAsState(null)
         .value?.route?.route
-        .equals("/addExpense/{id}")
+        .equals("/addExpense/{id}?")
 
     if (isOnAddExpense) {
         titleTopBar = TitleTopBarTypes.ADD_EXPENSE
