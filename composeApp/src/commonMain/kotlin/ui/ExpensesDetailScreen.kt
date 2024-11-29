@@ -113,9 +113,6 @@ fun ExpensesDetailScreen(
                 },
                 keyboardController = keyboardController
             )
-            Spacer(
-                modifier = Modifier.height(30.dp)
-            )
             ExpenseTypeSelector(
                 categorySelected = categorySelected,
                 openBottomSheet = {
@@ -123,9 +120,6 @@ fun ExpensesDetailScreen(
                         sheetState.show()
                     }
                 }
-            )
-            Spacer(
-                modifier = Modifier.height(30.dp)
             )
             ExpenseDescription(
                 descriptionContent = description,
