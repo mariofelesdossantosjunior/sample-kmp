@@ -1,5 +1,6 @@
 package di
 
+import com.expenseApp.db.AppDatabase
 import data.ExpenseManager
 import data.ExpenseRepositoryImpl
 import domain.ExpenseRepository
@@ -8,7 +9,9 @@ import org.koin.core.module.dsl.withOptions
 import org.koin.dsl.module
 import presentation.ExpensesViewModel
 
-val appModules = module {
+fun appModules(
+    appDatabase: AppDatabase
+) = module {
 
     single {
         ExpenseManager
@@ -17,7 +20,10 @@ val appModules = module {
     }
 
     single<ExpenseRepository> {
-        ExpenseRepositoryImpl(get())
+        ExpenseRepositoryImpl(
+            expenseManager = get(),
+            appDatabase = appDatabase
+        )
     }
 
     factory {
