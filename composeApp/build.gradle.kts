@@ -32,6 +32,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
 
         commonMain.dependencies {
@@ -46,6 +47,11 @@ kotlin {
 
             api(libs.precompose)
             api(libs.precompose.viewmodel)
+            api(libs.precompose.koin)
+
+           implementation(libs.koin.core)
+           implementation(libs.koin.compose)
+
         }
 
         commonTest.dependencies {

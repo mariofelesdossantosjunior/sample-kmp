@@ -72,4 +72,16 @@ class ExpenseRepositoryTest {
         val expenseListAfter = repository.getAll()
         assertEquals(updatedExpense, expenseListAfter.find { it.id == newExpense })
     }
+
+    @Test
+    fun get_all_categories() {
+        //Given
+        val categories = mutableListOf<ExpenseCategory>()
+
+        //When
+        categories.addAll(repository.getCategories())
+
+        //Then
+        assertTrue(categories.isNotEmpty())
+    }
 }
