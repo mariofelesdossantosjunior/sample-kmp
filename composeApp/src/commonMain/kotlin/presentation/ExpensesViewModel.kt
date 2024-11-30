@@ -17,10 +17,17 @@ class ExpensesViewModel(
     private val _uiState = MutableStateFlow(ExpensesUIState())
     val uiState = _uiState.asStateFlow()
 
-    private val allExpenses = repository.getAll()
+    private var allExpenses = mutableListOf<Expense>()
 
     init {
         getAllExpenses()
+    }
+
+    private fun updateExpenses() {
+        viewModelScope.launch {
+            allExpenses = repository.getAll().toMutableList()
+            updateState()
+        }
     }
 
     private fun updateState() {
@@ -33,30 +40,23 @@ class ExpensesViewModel(
     }
 
     private fun getAllExpenses() {
-        viewModelScope.launch {
-            updateState()
-        }
+        repository.getAll()
+        updateExpenses()
     }
 
     fun add(expense: Expense) {
-        viewModelScope.launch {
-            repository.add(expense)
-            updateState()
-        }
+        repository.add(expense)
+        updateExpenses()
     }
 
     fun edit(expense: Expense) {
-        viewModelScope.launch {
-            repository.edit(expense)
-            updateState()
-        }
+        repository.edit(expense)
+        updateExpenses()
     }
 
     fun delete(expense: Expense) {
-        viewModelScope.launch {
-            repository.delete(expense)
-            updateState()
-        }
+        repository.delete(expense)
+        updateExpenses()
     }
 
     fun getExpenseByID(id: Long): Expense {
