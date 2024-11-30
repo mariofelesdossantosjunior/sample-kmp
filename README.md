@@ -1,14 +1,15 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+This is a Kotlin Multiplatform project targeting Android, iOS and Backend.
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+This project use libs, Clean Arch with:
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+1. [Decompose](https://github.com/arkivanov/Decompose)
+2. [Koin](https://github.com/InsertKoinIO/koin)
+3. [SQLDelight](https://github.com/sqldelight/sqldelight)
+4. [Ktor](https://github.com/ktorio/ktor)
+5. [Compose UI](https://www.jetbrains.com/compose-multiplatform/)
+
+![image](https://github.com/user-attachments/assets/4f7857f7-9617-4f9b-b1ee-93c79a4b6c7a)
+![image](https://github.com/user-attachments/assets/09cacbcc-b0e9-4b38-a2a8-0fde6ab55454)
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
