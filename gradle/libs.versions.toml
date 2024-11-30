@@ -16,6 +16,7 @@ kotlin = "2.0.21"
 precompose = "1.5.10"
 koin = "3.5.6"
 koinCompose = "1.1.5"
+sqlDelight = "2.0.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -36,9 +37,15 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
+runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
+android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }

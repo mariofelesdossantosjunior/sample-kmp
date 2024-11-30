@@ -6,6 +6,16 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.sqldelight)
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.expenseApp.db")
+        }
+    }
 }
 
 kotlin {
@@ -33,6 +43,11 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
+            implementation(libs.android.driver)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.native.driver)
         }
 
         commonMain.dependencies {
@@ -52,6 +67,7 @@ kotlin {
            implementation(libs.koin.core)
            implementation(libs.koin.compose)
 
+            implementation(libs.runtime)
         }
 
         commonTest.dependencies {
