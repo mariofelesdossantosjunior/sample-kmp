@@ -1,11 +1,10 @@
 package com.mario
 
+import com.mario.plugins.configureRouting
+import com.mario.plugins.configureSerialization
 import io.ktor.server.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.get
-import io.ktor.server.routing.routing
 
 fun main() {
     embeddedServer(
@@ -17,9 +16,7 @@ fun main() {
 }
 
 fun Application.module() {
-    routing {
-        get("/") {
-            call.respondText("Ktor: Hello")
-        }
-    }
+    configureSerialization()
+    configureRouting()
 }
+
