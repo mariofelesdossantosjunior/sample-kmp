@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -42,26 +45,50 @@ fun ExpensesScreen(
 
     val colors = getColorsTheme()
 
-    LazyColumn(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        stickyHeader {
-            Column(
-                modifier = Modifier.background(
-                    color = colors.backgroundColor
-                )
+    when (uiState) {
+        ExpensesUIState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                ExpensesTotalHeader(total = uiState.total)
-                AllExpensesHeader()
+               CircularProgressIndicator()
+            }
+        }
+        is ExpensesUIState.Success -> {
+            LazyColumn(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                stickyHeader {
+                    Column(
+                        modifier = Modifier.background(
+                            color = colors.backgroundColor
+                        )
+                    ) {
+                        ExpensesTotalHeader(total = uiState.total)
+                        AllExpensesHeader()
+                    }
+                }
+
+                items(uiState.expenses) { expense ->
+                    ExpensesItem(
+                        expense = expense,
+                        onExpenseClick = onExpenseClick
+                    )
+                }
             }
         }
 
-        items(uiState.expenses) { expense ->
-            ExpensesItem(
-                expense = expense,
-                onExpenseClick = onExpenseClick
-            )
+        is ExpensesUIState.Error -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Error ${uiState.message}",
+                    style = MaterialTheme.typography.body1
+                )
+            }
         }
     }
 }

@@ -2,7 +2,8 @@ package presentation
 
 import model.Expense
 
-data class ExpensesUIState(
-    val expenses: List<Expense> = emptyList(),
-    val total: Double = 0.0
-)
+sealed class ExpensesUIState {
+    data object Loading : ExpensesUIState()
+    data class Success(val expenses: List<Expense>, val total: Double) : ExpensesUIState()
+    data class Error(val message: String) : ExpensesUIState()
+}

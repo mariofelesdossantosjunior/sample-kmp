@@ -5,13 +5,13 @@ import model.ExpenseCategory
 
 interface ExpenseRepository {
 
-    fun getAll(): List<Expense>
+    suspend fun getAll(): List<Expense>
 
-    fun add(expense: Expense)
+    suspend fun add(expense: Expense)
 
-    fun delete(expense: Expense): List<Expense>
+    suspend fun delete(expense: Expense): List<Expense>
 
-    fun edit(expense: Expense)
+    suspend fun edit(expense: Expense)
 
     fun getCategories(): List<ExpenseCategory>
 }

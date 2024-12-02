@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.sqldelight)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.sqldelight)
 }
 
 sqldelight {
@@ -22,10 +22,10 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget = JvmTarget.JVM_11
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -36,17 +36,20 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
+            implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.ktor.client.okhttp)
             implementation(libs.android.driver)
         }
 
         iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
             implementation(libs.native.driver)
         }
 
@@ -64,10 +67,15 @@ kotlin {
             api(libs.precompose.viewmodel)
             api(libs.precompose.koin)
 
-           implementation(libs.koin.core)
-           implementation(libs.koin.compose)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
 
             implementation(libs.runtime)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.client.logging)
         }
 
         commonTest.dependencies {
